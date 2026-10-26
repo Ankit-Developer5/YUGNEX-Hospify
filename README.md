@@ -39,7 +39,7 @@ Usernames (hospital short names): aiims, safdarjung, rml, loknayak, gangaram, ma
 Socket events: `hospital:update` (bed change), `hospital:stale` (no update for 30+ minutes).
 
 ## Honest notes
-- Hospital names and locations are real (approximate). **Bed numbers and phone numbers are simulated placeholders.** Say this in your pitch.
+- Hospital names and locations are real (approximate). **Bed numbers and phone numbers are simulated placeholders.**
 - ETA is road distance at normal speed, not live traffic.
 - The map and route need internet.
 - Config: PORT, JWT_SECRET, DEMO_PASSWORD.
