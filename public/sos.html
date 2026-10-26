@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/app.css"><title>Emergency SOS | Hospify</title></head><body>
+<header id="hd"></header><div class="sim" data-i="sim"></div>
+<main>
+<div class="warn"><span data-i="call112"></span> <a class="btn red" href="tel:112" style="margin-left:10px;padding:6px 16px">112</a></div>
+<h1 data-i="sos_h" style="margin:0 0 4px"></h1><p class="sub" data-i="sos_p"></p>
+<div class="needs" id="needs"></div>
+<div class="sosbtn"><button class="btn mic" id="mic" type="button"><span data-i="say_need"></span></button><select id="ty" class="field" style="width:auto;margin:0" aria-label="Type"><option value="">All</option><option value="gov">Gov</option><option value="pvt">Pvt</option></select><span class="sub" id="note" aria-live="polite"></span></div>
+<div class="res" id="res" aria-live="polite"></div>
+</main>
+<script src="/app.js"></script>
+<script>
+let last=null,cur=null;const KEYS=["icu","vent","ped","gen"];
+function show(a){$("#res").innerHTML=a.length?a.map((h,i)=>{const[fc,ft]=fresh(h),n=h.beds[h.need];return`<div class="card"><div class="rank">${i+1}</div><div><div class="top"><span>${h.name}${tag(h)}</span>${i===0?'<span class="pill g">'+t("best")+'</span>':""}</div><div class="sub">${h.city} • ${t("away",{km:h.km,min:fm(h.min)})}</div><div><b class="${cls(n[0]/n[1])}">${n[0]}</b> ${t(h.need)} ${t("open")} <span class="pill ${fc}">${ft}</span></div></div><div class="acts" style="flex-direction:column;margin:0"><a class="btn" href="tel:${h.phone}">${t("call")}</a><a class="btn alt" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${h.lat},${h.lng}">${t("dirs")}</a></div></div>`}).join(""):`<div class="card"><b>${t("none")}</b></div>`}
+function fill(){const o=$("#ty").options;o[0].text=t("all_types");o[1].text=t("gov");o[2].text=t("pvt");$("#needs").innerHTML=KEYS.map(k=>`<button type="button" data-n="${k}" class="${k===cur?"on":""}">${t(k)}</button>`).join("");if(last)show(last)}
+document.addEventListener("lang",fill);nav("sos");fill();
+async function go(n){cur=n;fill();$("#res").innerHTML='<div class="sk"></div>'.repeat(3);$("#note").textContent=t("locating");
+ const p=await here();$("#note").textContent=p.def?t("def_loc"):"";
+ try{const a=await api(`/api/sos?need=${n}&lat=${p.lat}&lng=${p.lng}&type=${$("#ty").value}`);a.forEach(h=>h.need=n);last=a;show(a);
+  speak(a[0]?t("vo_best",{name:a[0].name,min:fm(a[0].min),n:a[0].beds[n][0],need:t(n)}):t("none"))}
+ catch(e){$("#res").innerHTML="";toast(e.message)}}
+$("#ty").onchange=()=>{if(cur)go(cur)};$("#needs").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.n)};
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!SR)$("#mic").classList.add("hide");else $("#mic").onclick=()=>{const r=new SR(),m=$("#mic");r.lang=lang==="hi"?"hi-IN":"en-IN";m.classList.add("on");$("#note").textContent=t("listening");
+ r.onresult=e=>{const x=e.results[0][0].transcript.toLowerCase();const k=/icu|आईसीयू|आई सी यू|intensive|गहन/.test(x)?"icu":/vent|वेंटिलेटर|सांस|breath/.test(x)?"vent":/child|kid|baby|pedia|बच्च|बाल/.test(x)?"ped":/general|सामान्य|जनरल|normal/.test(x)?"gen":null;if(k)go(k);else toast(x)};
+ r.onend=()=>m.classList.remove("on");r.onerror=()=>{m.classList.remove("on");toast("Microphone blocked or unavailable")};r.start()};
+</script></body></html>

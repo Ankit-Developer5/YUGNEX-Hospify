@@ -1,0 +1,843 @@
+[
+  {
+    "id": 1,
+    "slug": "aiims",
+    "name": "AIIMS New Delhi",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "gov",
+    "lat": 28.5672,
+    "lng": 77.21,
+    "spec": [
+      "Trauma centre",
+      "Cardiology",
+      "Paediatrics"
+    ],
+    "phone": "+911100000001",
+    "beds": {
+      "gen": [
+        60,
+        220
+      ],
+      "icu": [
+        9,
+        60
+      ],
+      "ped": [
+        14,
+        40
+      ],
+      "vent": [
+        5,
+        24
+      ]
+    },
+    "updatedAt": 1792950148491,
+    "history": []
+  },
+  {
+    "id": 2,
+    "slug": "safdarjung",
+    "name": "Safdarjung Hospital",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "gov",
+    "lat": 28.5677,
+    "lng": 77.2066,
+    "spec": [
+      "Emergency",
+      "Burns unit"
+    ],
+    "phone": "+911100000002",
+    "beds": {
+      "gen": [
+        45,
+        180
+      ],
+      "icu": [
+        4,
+        40
+      ],
+      "ped": [
+        6,
+        24
+      ],
+      "vent": [
+        2,
+        16
+      ]
+    },
+    "updatedAt": 1792949788491,
+    "history": []
+  },
+  {
+    "id": 3,
+    "slug": "rml",
+    "name": "Ram Manohar Lohia Hospital",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "gov",
+    "lat": 28.6258,
+    "lng": 77.201,
+    "spec": [
+      "Emergency",
+      "Cardiology"
+    ],
+    "phone": "+911100000003",
+    "beds": {
+      "gen": [
+        30,
+        150
+      ],
+      "icu": [
+        6,
+        30
+      ],
+      "ped": [
+        3,
+        18
+      ],
+      "vent": [
+        3,
+        12
+      ]
+    },
+    "updatedAt": 1792950028491,
+    "history": []
+  },
+  {
+    "id": 4,
+    "slug": "loknayak",
+    "name": "Lok Nayak Hospital",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "gov",
+    "lat": 28.6377,
+    "lng": 77.2403,
+    "spec": [
+      "Emergency",
+      "Trauma"
+    ],
+    "phone": "+911100000004",
+    "beds": {
+      "gen": [
+        70,
+        260
+      ],
+      "icu": [
+        1,
+        34
+      ],
+      "ped": [
+        9,
+        30
+      ],
+      "vent": [
+        0,
+        14
+      ]
+    },
+    "updatedAt": 1792948108491,
+    "history": []
+  },
+  {
+    "id": 5,
+    "slug": "gangaram",
+    "name": "Sir Ganga Ram Hospital",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "pvt",
+    "lat": 28.6387,
+    "lng": 77.1895,
+    "spec": [
+      "Cardiology",
+      "Intensivist"
+    ],
+    "phone": "+911100000005",
+    "beds": {
+      "gen": [
+        22,
+        120
+      ],
+      "icu": [
+        5,
+        26
+      ],
+      "ped": [
+        4,
+        16
+      ],
+      "vent": [
+        2,
+        10
+      ]
+    },
+    "updatedAt": 1792949608492,
+    "history": []
+  },
+  {
+    "id": 6,
+    "slug": "maxsaket",
+    "name": "Max Super Speciality, Saket",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "pvt",
+    "lat": 28.5275,
+    "lng": 77.2117,
+    "spec": [
+      "Cardiology",
+      "Neuro"
+    ],
+    "phone": "+911100000006",
+    "beds": {
+      "gen": [
+        18,
+        100
+      ],
+      "icu": [
+        3,
+        28
+      ],
+      "ped": [
+        5,
+        16
+      ],
+      "vent": [
+        1,
+        10
+      ]
+    },
+    "updatedAt": 1792949908492,
+    "history": []
+  },
+  {
+    "id": 7,
+    "slug": "apollo",
+    "name": "Indraprastha Apollo",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "pvt",
+    "lat": 28.5411,
+    "lng": 77.2835,
+    "spec": [
+      "Cardiology",
+      "Transplant"
+    ],
+    "phone": "+911100000007",
+    "beds": {
+      "gen": [
+        26,
+        110
+      ],
+      "icu": [
+        7,
+        30
+      ],
+      "ped": [
+        8,
+        20
+      ],
+      "vent": [
+        4,
+        12
+      ]
+    },
+    "updatedAt": 1792950208492,
+    "history": []
+  },
+  {
+    "id": 8,
+    "slug": "ddu",
+    "name": "Deen Dayal Upadhyay Hospital",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "gov",
+    "lat": 28.6281,
+    "lng": 77.0914,
+    "spec": [
+      "Emergency",
+      "Maternity"
+    ],
+    "phone": "+911100000008",
+    "beds": {
+      "gen": [
+        38,
+        130
+      ],
+      "icu": [
+        0,
+        16
+      ],
+      "ped": [
+        2,
+        14
+      ],
+      "vent": [
+        0,
+        6
+      ]
+    },
+    "updatedAt": 1792947808492,
+    "history": []
+  },
+  {
+    "id": 9,
+    "slug": "fortis",
+    "name": "Fortis Escorts Heart Institute",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "pvt",
+    "lat": 28.5605,
+    "lng": 77.274,
+    "spec": [
+      "Cardiology",
+      "Cardiac surgery"
+    ],
+    "phone": "+911100000009",
+    "beds": {
+      "gen": [
+        14,
+        80
+      ],
+      "icu": [
+        4,
+        32
+      ],
+      "ped": [
+        2,
+        10
+      ],
+      "vent": [
+        3,
+        14
+      ]
+    },
+    "updatedAt": 1792949968492,
+    "history": []
+  },
+  {
+    "id": 10,
+    "slug": "blkmax",
+    "name": "BLK-Max Super Speciality",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "type": "pvt",
+    "lat": 28.6436,
+    "lng": 77.1778,
+    "spec": [
+      "Oncology",
+      "Transplant"
+    ],
+    "phone": "+911100000010",
+    "beds": {
+      "gen": [
+        20,
+        110
+      ],
+      "icu": [
+        6,
+        34
+      ],
+      "ped": [
+        5,
+        18
+      ],
+      "vent": [
+        2,
+        12
+      ]
+    },
+    "updatedAt": 1792949728492,
+    "history": []
+  },
+  {
+    "id": 11,
+    "slug": "medanta",
+    "name": "Medanta The Medicity",
+    "city": "Gurugram",
+    "state": "Haryana",
+    "type": "pvt",
+    "lat": 28.4395,
+    "lng": 77.0425,
+    "spec": [
+      "Cardiology",
+      "Neuro"
+    ],
+    "phone": "+911100000011",
+    "beds": {
+      "gen": [
+        30,
+        160
+      ],
+      "icu": [
+        8,
+        48
+      ],
+      "ped": [
+        6,
+        22
+      ],
+      "vent": [
+        4,
+        18
+      ]
+    },
+    "updatedAt": 1792950088492,
+    "history": []
+  },
+  {
+    "id": 12,
+    "slug": "jaypee",
+    "name": "Jaypee Hospital",
+    "city": "Noida",
+    "state": "Uttar Pradesh",
+    "type": "pvt",
+    "lat": 28.5105,
+    "lng": 77.389,
+    "spec": [
+      "Emergency",
+      "Ortho"
+    ],
+    "phone": "+911100000012",
+    "beds": {
+      "gen": [
+        24,
+        120
+      ],
+      "icu": [
+        5,
+        30
+      ],
+      "ped": [
+        4,
+        16
+      ],
+      "vent": [
+        2,
+        10
+      ]
+    },
+    "updatedAt": 1792949428492,
+    "history": []
+  },
+  {
+    "id": 13,
+    "slug": "pgimer",
+    "name": "PGIMER",
+    "city": "Chandigarh",
+    "state": "Chandigarh",
+    "type": "gov",
+    "lat": 30.765,
+    "lng": 76.7757,
+    "spec": [
+      "Trauma centre",
+      "Neuro"
+    ],
+    "phone": "+911100000013",
+    "beds": {
+      "gen": [
+        80,
+        300
+      ],
+      "icu": [
+        7,
+        70
+      ],
+      "ped": [
+        12,
+        46
+      ],
+      "vent": [
+        4,
+        26
+      ]
+    },
+    "updatedAt": 1792949848492,
+    "history": []
+  },
+  {
+    "id": 14,
+    "slug": "sms",
+    "name": "SMS Hospital",
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "type": "gov",
+    "lat": 26.9059,
+    "lng": 75.8197,
+    "spec": [
+      "Emergency",
+      "Trauma"
+    ],
+    "phone": "+911100000014",
+    "beds": {
+      "gen": [
+        55,
+        200
+      ],
+      "icu": [
+        5,
+        44
+      ],
+      "ped": [
+        8,
+        30
+      ],
+      "vent": [
+        3,
+        18
+      ]
+    },
+    "updatedAt": 1792949548492,
+    "history": []
+  },
+  {
+    "id": 15,
+    "slug": "kgmu",
+    "name": "King George's Medical University",
+    "city": "Lucknow",
+    "state": "Uttar Pradesh",
+    "type": "gov",
+    "lat": 26.869,
+    "lng": 80.914,
+    "spec": [
+      "Trauma centre",
+      "Paediatrics"
+    ],
+    "phone": "+911100000015",
+    "beds": {
+      "gen": [
+        66,
+        240
+      ],
+      "icu": [
+        6,
+        52
+      ],
+      "ped": [
+        10,
+        36
+      ],
+      "vent": [
+        2,
+        20
+      ]
+    },
+    "updatedAt": 1792947988492,
+    "history": []
+  },
+  {
+    "id": 16,
+    "slug": "kem",
+    "name": "KEM Hospital",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "type": "gov",
+    "lat": 19.0022,
+    "lng": 72.841,
+    "spec": [
+      "Emergency",
+      "Burns"
+    ],
+    "phone": "+911100000016",
+    "beds": {
+      "gen": [
+        48,
+        210
+      ],
+      "icu": [
+        3,
+        46
+      ],
+      "ped": [
+        7,
+        28
+      ],
+      "vent": [
+        1,
+        16
+      ]
+    },
+    "updatedAt": 1792949908492,
+    "history": []
+  },
+  {
+    "id": 17,
+    "slug": "lilavati",
+    "name": "Lilavati Hospital",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "type": "pvt",
+    "lat": 19.0509,
+    "lng": 72.8294,
+    "spec": [
+      "Cardiology",
+      "Neuro"
+    ],
+    "phone": "+911100000017",
+    "beds": {
+      "gen": [
+        16,
+        90
+      ],
+      "icu": [
+        4,
+        28
+      ],
+      "ped": [
+        3,
+        12
+      ],
+      "vent": [
+        2,
+        10
+      ]
+    },
+    "updatedAt": 1792950148492,
+    "history": []
+  },
+  {
+    "id": 18,
+    "slug": "sskm",
+    "name": "SSKM Hospital",
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "type": "gov",
+    "lat": 22.5393,
+    "lng": 88.3441,
+    "spec": [
+      "Trauma centre",
+      "Neuro"
+    ],
+    "phone": "+911100000018",
+    "beds": {
+      "gen": [
+        72,
+        260
+      ],
+      "icu": [
+        8,
+        50
+      ],
+      "ped": [
+        9,
+        32
+      ],
+      "vent": [
+        3,
+        20
+      ]
+    },
+    "updatedAt": 1792949668492,
+    "history": []
+  },
+  {
+    "id": 19,
+    "slug": "rggh",
+    "name": "Rajiv Gandhi Govt General Hospital",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "type": "gov",
+    "lat": 13.081,
+    "lng": 80.2774,
+    "spec": [
+      "Emergency",
+      "Trauma"
+    ],
+    "phone": "+911100000019",
+    "beds": {
+      "gen": [
+        64,
+        230
+      ],
+      "icu": [
+        7,
+        48
+      ],
+      "ped": [
+        11,
+        34
+      ],
+      "vent": [
+        4,
+        22
+      ]
+    },
+    "updatedAt": 1792949968492,
+    "history": []
+  },
+  {
+    "id": 20,
+    "slug": "apollochennai",
+    "name": "Apollo Hospitals, Greams Road",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "type": "pvt",
+    "lat": 13.0627,
+    "lng": 80.2512,
+    "spec": [
+      "Cardiology",
+      "Transplant"
+    ],
+    "phone": "+911100000020",
+    "beds": {
+      "gen": [
+        28,
+        140
+      ],
+      "icu": [
+        9,
+        40
+      ],
+      "ped": [
+        5,
+        20
+      ],
+      "vent": [
+        5,
+        16
+      ]
+    },
+    "updatedAt": 1792950208492,
+    "history": []
+  },
+  {
+    "id": 21,
+    "slug": "victoria",
+    "name": "Victoria Hospital",
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "type": "gov",
+    "lat": 12.9626,
+    "lng": 77.5742,
+    "spec": [
+      "Emergency",
+      "Burns"
+    ],
+    "phone": "+911100000021",
+    "beds": {
+      "gen": [
+        52,
+        190
+      ],
+      "icu": [
+        4,
+        38
+      ],
+      "ped": [
+        8,
+        26
+      ],
+      "vent": [
+        2,
+        14
+      ]
+    },
+    "updatedAt": 1792949728492,
+    "history": []
+  },
+  {
+    "id": 22,
+    "slug": "manipal",
+    "name": "Manipal Hospital, Old Airport Road",
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "type": "pvt",
+    "lat": 12.9585,
+    "lng": 77.6481,
+    "spec": [
+      "Cardiology",
+      "Oncology"
+    ],
+    "phone": "+911100000022",
+    "beds": {
+      "gen": [
+        20,
+        110
+      ],
+      "icu": [
+        6,
+        32
+      ],
+      "ped": [
+        4,
+        16
+      ],
+      "vent": [
+        3,
+        12
+      ]
+    },
+    "updatedAt": 1792950028492,
+    "history": []
+  },
+  {
+    "id": 23,
+    "slug": "osmania",
+    "name": "Osmania General Hospital",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "type": "gov",
+    "lat": 17.3724,
+    "lng": 78.4741,
+    "spec": [
+      "Emergency",
+      "Trauma"
+    ],
+    "phone": "+911100000023",
+    "beds": {
+      "gen": [
+        58,
+        220
+      ],
+      "icu": [
+        2,
+        40
+      ],
+      "ped": [
+        6,
+        28
+      ],
+      "vent": [
+        1,
+        16
+      ]
+    },
+    "updatedAt": 1792947628492,
+    "history": []
+  },
+  {
+    "id": 24,
+    "slug": "civilahd",
+    "name": "Civil Hospital Ahmedabad",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "type": "gov",
+    "lat": 23.054,
+    "lng": 72.603,
+    "spec": [
+      "Trauma centre",
+      "Emergency"
+    ],
+    "phone": "+911100000024",
+    "beds": {
+      "gen": [
+        60,
+        250
+      ],
+      "icu": [
+        6,
+        46
+      ],
+      "ped": [
+        9,
+        32
+      ],
+      "vent": [
+        3,
+        20
+      ]
+    },
+    "updatedAt": 1792949488492,
+    "history": []
+  }
+]

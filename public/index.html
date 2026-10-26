@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/app.css"><title>Hospify</title></head><body>
+<header id="hd"></header><div class="sim" data-i="sim"></div>
+<section class="hero">
+<i class="pin" style="left:6%;top:18%;background:#4ade80"></i><i class="pin" style="left:44%;top:12%;background:#fbbf24;animation-delay:-2s"></i><i class="pin" style="left:30%;top:70%;background:#f87171;animation-delay:-4s"></i><i class="pin" style="left:92%;top:20%;background:#4ade80;animation-delay:-1s"></i><i class="pin" style="left:52%;top:64%;background:#4ade80;animation-delay:-3s"></i>
+<svg class="ecg" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 45H300L330 45L350 8L375 74L395 28L410 45H700L730 45L750 8L775 74L795 28L810 45H1200"/></svg>
+<div class="in"><div>
+<div class="badge"><span class="dot"></span><span data-i="badge"></span></div>
+<h1><span data-i="hero_h"></span></h1><p data-i="hero_p"></p>
+<div class="row"><a class="btn big" href="/find.html" data-i="find"></a><a class="btn big red" href="/sos.html" data-i="sos"></a><button class="btn big alt" id="hear" type="button" style="color:#fff;border-color:rgba(255,255,255,.4)" data-i="hear"></button></div>
+</div><div class="live" id="live"></div></div>
+</section>
+<div class="stats"><div><b id="c1">0</b><span data-i="s1"></span></div><div><b id="c2">0</b><span data-i="s2"></span></div><div><b>&lt;1</b><span data-i="s3"></span></div></div>
+<main>
+<div class="grid3">
+<div class="card rv"><div class="ic">▦</div><h3 data-i="f1h"></h3><p data-i="f1p"></p></div>
+<div class="card rv" style="transition-delay:.12s"><div class="ic">➤</div><h3 data-i="f2h"></h3><p data-i="f2p"></p></div>
+<div class="card rv" style="transition-delay:.24s"><div class="ic">!</div><h3 data-i="f3h"></h3><p data-i="f3p"></p></div></div>
+<h2 class="main-h rv" data-i="how_h"></h2>
+<div class="steps3">
+<div class="card rv"><h3 data-i="st1h"></h3><p class="sub" data-i="st1p"></p></div>
+<div class="card rv" style="transition-delay:.12s"><h3 data-i="st2h"></h3><p class="sub" data-i="st2p"></p></div>
+<div class="card rv" style="transition-delay:.24s"><h3 data-i="st3h"></h3><p class="sub" data-i="st3p"></p></div></div>
+</main>
+<section class="cta rv"><h2 data-i="cta_h"></h2><p data-i="cta_p"></p><a class="btn big" href="/sos.html" data-i="sos"></a></section>
+<footer>Hospify</footer>
+<script src="/socket.io/socket.io.js"></script><script src="/app.js"></script>
+<script>
+let H=[];const DC={g:"#4ade80",a:"#fbbf24",r:"#f87171"};
+function live(){if(!H.length)return;$("#live").innerHTML='<b class="t">'+t("live_h")+'</b>'+H.slice().sort((a,b)=>b.beds.icu[0]-a.beds.icu[0]).slice(0,5).map(h=>`<div class="li"><span>${h.name}</span><span class="n" style="color:${DC[cls(h.beds.icu[0]/h.beds.icu[1])]}">${h.beds.icu[0]}</span></div>`).join("")}
+function count(el,to){const t0=performance.now();(function f(n){const p=Math.min(1,(n-t0)/1300);el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(f)})(t0)}
+document.addEventListener("lang",live);nav("home");
+const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");ob.unobserve(e.target)}}),{threshold:.15});$$(".rv").forEach(e=>ob.observe(e));
+$("#hear").onclick=()=>speak(t("vo_intro"));
+(async()=>{try{H=await api("/api/hospitals")}catch(e){return}count($("#c1"),H.length);count($("#c2"),H.reduce((a,h)=>a+sum(h,1),0));live();
+const s=sock();if(s)s.on("hospital:update",u=>{const i=H.findIndex(x=>x.id===u.id);if(i>=0){H[i]=u;live()}})})();
+</script></body></html>

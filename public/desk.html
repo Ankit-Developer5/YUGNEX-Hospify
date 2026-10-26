@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/app.css"><title>Hospital desk | Hospify</title></head><body>
+<header id="hd"></header>
+<main style="max-width:600px"><div class="card">
+<form id="login"><h2 style="margin-top:0">Hospital desk sign-in</h2><label for="u">Username</label><input id="u" class="field" placeholder="e.g. aiims, kem, medanta" required><label for="pw">Password</label><input id="pw" class="field" type="password" required><button class="btn" type="submit">Sign in</button><p class="sub">Demo password: demo123 (set DEMO_PASSWORD on the server).</p></form>
+<div id="desk" class="hide"><div class="top"><h2 id="who" style="margin:0"></h2><button class="btn alt" id="out" type="button">Sign out</button></div>
+<div id="stale" class="warn hide" style="margin-top:14px"></div><div id="steps"></div>
+<div class="acts"><button class="btn" id="save">Publish update</button></div>
+<h3>Recent updates</h3><div id="hist" class="sub"></div></div></div></main>
+<script src="/socket.io/socket.io.js"></script><script src="/app.js"></script>
+<script>
+nav("desk");let S=null,me=null,draft={};try{S=JSON.parse(sessionStorage.getItem("mm"))}catch(e){}
+const save=()=>{try{S?sessionStorage.setItem("mm",JSON.stringify(S)):sessionStorage.removeItem("mm")}catch(e){}};
+function steps(){$("#steps").innerHTML=BED.map(k=>`<div class="step"><span>${t(k)}</span><span><button data-k="${k}" data-d="-1" aria-label="Fewer ${k}">−</button><output>${draft[k]} / ${me.beds[k][1]}</output><button data-k="${k}" data-d="1" aria-label="More ${k}">+</button></span></div>`).join("")}
+function chk(){const m=mins(me);$("#stale").classList.toggle("hide",m<30);$("#stale").textContent="Reminder: your last update was "+m+" minutes ago. Please publish current bed counts."}
+async function load(){if(!S){$("#login").classList.remove("hide");$("#desk").classList.add("hide");return}
+ const all=await api("/api/hospitals");me=all.find(h=>h.id===S.hospitalId);$("#login").classList.add("hide");$("#desk").classList.remove("hide");$("#who").textContent=me.name;
+ draft=Object.fromEntries(BED.map(k=>[k,me.beds[k][0]]));steps();chk();
+ const hs=await api(`/api/hospitals/${me.id}/history`);$("#hist").innerHTML=hs.slice(-6).reverse().map(x=>new Date(x.at).toLocaleTimeString()+": ICU "+x.free.icu+", General "+x.free.gen+", Pediatric "+x.free.ped+", Ventilator "+x.free.vent).join("<br>")||"No updates yet."}
+$("#steps").onclick=e=>{const b=e.target.closest("[data-k]");if(!b)return;const k=b.dataset.k;draft[k]=Math.max(0,Math.min(me.beds[k][1],draft[k]+ +b.dataset.d));steps()};
+$("#login").onsubmit=async e=>{e.preventDefault();try{const d=await api("/api/login",{method:"POST",body:JSON.stringify({username:$("#u").value,password:$("#pw").value})});S={token:d.token,hospitalId:d.hospital.id};save();load()}catch(x){toast(x.message)}};
+$("#out").onclick=()=>{S=null;save();load()};
+$("#save").onclick=async()=>{try{await api(`/api/hospitals/${S.hospitalId}/beds`,{method:"PUT",body:JSON.stringify(draft)});toast("Published. All patient screens updated.");load()}catch(x){if(/session|Sign in/.test(x.message)){S=null;save();load()}toast(x.message)}};
+const s=sock();if(s)s.on("hospital:stale",d=>{if(me&&d.id===me.id){$("#stale").classList.remove("hide");$("#stale").textContent="Reminder: your last update was "+d.minutes+" minutes ago. Please publish current bed counts."}});
+document.addEventListener("lang",()=>{if(me)steps()});load();
+</script></body></html>

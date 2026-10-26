@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"><title>Find a bed | Hospify</title></head><body>
+<header id="hd"></header><div class="sim" data-i="sim"></div>
+<main class="find"><aside>
+<div class="chips" id="chips" role="group"></div><div class="chips" id="tchips" role="group"></div><select id="state" class="field" aria-label="State"></select>
+<select id="sort" class="field" aria-label="Sort"><option value="near" data-i="near"></option><option value="free" data-i="most"></option></select>
+<div class="card list" id="list"></div></aside>
+<section><div id="map"></div><div class="card" id="detail" style="margin-top:14px"></div></section></main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="/socket.io/socket.io.js"></script><script src="/app.js"></script>
+<script>
+nav("find");
+let H=[],need="all",ty="all",st="all",sel=null,me={lat:28.6139,lng:77.209},map,lay,rl,rt=null;
+const key=()=>need==="all"?null:need;
+const km=h=>+(hav(me.lat,me.lng,h.lat,h.lng)*1.35).toFixed(1),eta=h=>Math.max(2,Math.round(km(h)/(km(h)<40?28:55)*60));
+function vis(){const k=key();return H.filter(h=>(!k||h.beds[k][0]>0)&&(ty==="all"||h.type===ty)&&(st==="all"||h.state===st)).sort((a,b)=>$("#sort").value==="near"?km(a)-km(b):ratio(b,k)-ratio(a,k))}
+function render(){$("#tchips").innerHTML=["all","gov","pvt"].map(k=>`<button class="chip" data-t="${k}" aria-pressed="${k===ty}">${t(k==="all"?"all_types":k)}</button>`).join("");const ss=[...new Set(H.map(h=>h.state))].sort();$("#state").innerHTML=`<option value="all">${t("all_states")}</option>`+ss.map(s=>`<option${s===st?" selected":""}>${s}</option>`).join("");
+ $("#chips").innerHTML=["all",...BED].map(k=>`<button class="chip" data-n="${k}" aria-pressed="${k===need}">${t(k==="all"?"need_all":k)}</button>`).join("");
+ const k=key(),v=vis();
+ $("#list").innerHTML=v.map(h=>{const[fc,ft]=fresh(h),f=k?h.beds[k][0]:h.beds.icu[0],lab=k?t(k):t("icu");
+  return`<button class="row" data-id="${h.id}" aria-current="${h.id===sel}"><div class="top"><span>${h.name}</span><span class="${cls(ratio(h,k))}">${f} ${lab}</span></div><div class="sub">${h.city} • ${t("away",{km:km(h),min:fm(eta(h))})}</div><span class="pill ${fc}">${ft}</span>${tag(h)}</button>`}).join("");
+ if(lay){lay.clearLayers();v.forEach(h=>L.circleMarker([h.lat,h.lng],{radius:h.id===sel?16:13,color:"#fff",weight:h.id===sel?4:2,fillColor:COL[cls(ratio(h,k))],fillOpacity:1}).bindTooltip(String(k?h.beds[k][0]:h.beds.icu[0]),{permanent:true,direction:"center",className:"cnt"}).on("click",()=>pick(h.id)).addTo(lay))}
+ detail()}
+function detail(){const h=H.find(x=>x.id===sel);if(!h){$("#detail").innerHTML="";return}const[fc,ft]=fresh(h);
+ $("#detail").innerHTML=`<div class="top"><h2 style="margin:0">${h.name}${tag(h)}</h2><span class="pill ${fc}">${ft}</span></div><div class="sub">${h.city}, ${h.state} • ${rt?t("away",{km:rt.km,min:fm(rt.min)})+(rt.estimated?" ("+t("route_est")+")":""):t("away",{km:km(h),min:fm(eta(h))})}</div><div class="bars">${bars(h)}</div><div class="sub"><b>${t("on_duty")}:</b> ${h.spec.join(", ")}</div><div class="acts"><a class="btn" href="tel:${h.phone}">${t("call")}</a><a class="btn alt" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${h.lat},${h.lng}">${t("dirs")}</a></div>`}
+async function pick(id){sel=id;rt=null;render();const h=H.find(x=>x.id===id);
+ try{rt=await api(`/api/route?flat=${me.lat}&flng=${me.lng}&tlat=${h.lat}&tlng=${h.lng}`);if(sel!==id)return;detail();if(map){if(rl)rl.remove();rl=L.polyline(rt.geometry,{color:"#0e7490",weight:5}).addTo(map);map.fitBounds(rl.getBounds(),{padding:[40,40]})}}catch(e){}}
+document.addEventListener("click",e=>{const c=e.target.closest(".chip");if(c){if(c.dataset.t)ty=c.dataset.t;else need=c.dataset.n;render();return}const r=e.target.closest(".row");if(r)pick(+r.dataset.id)});
+$("#sort").onchange=render;$("#state").onchange=e=>{st=e.target.value;render();if(map){const v=vis();if(v.length)map.fitBounds(v.map(h=>[h.lat,h.lng]),{padding:[40,40],maxZoom:13})}};document.addEventListener("lang",render);
+(async()=>{
+ if(typeof L==="undefined")$("#map").innerHTML='<p style="padding:20px" class="sub">The map needs an internet connection.</p>';
+ else{map=L.map("map").setView([me.lat,me.lng],12);L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(map);lay=L.layerGroup().addTo(map)}
+ H=await api("/api/hospitals");render();
+ const p=await here();me=p;if(map){map.setView([me.lat,me.lng],12);L.circleMarker([me.lat,me.lng],{radius:8,color:"#fff",weight:3,fillColor:"#2563eb",fillOpacity:1}).addTo(map).bindTooltip("You")}
+ pick(vis()[0].id);
+ const s=sock();if(s)s.on("hospital:update",u=>{const i=H.findIndex(x=>x.id===u.id);if(i>=0){H[i]=u;render();toast(u.name)}});
+ setInterval(render,30000)})();
+</script></body></html>
